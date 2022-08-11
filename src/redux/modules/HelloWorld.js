@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { URL } from ".";
 
-
-const URL = process.env.REACT_APP_API_URL
+// const URL = process.env.REACT_APP_API_URL
 // const URL = 'https://hiworld-voyage99.herokuapp.com/'
 
 export const fetchUser = createAsyncThunk("users/fetchUser", async () => {
   
   return await axios
-    .get( URL+"books")
+    .get( `${URL}books` )
     .then((res) => res.data)
     .catch((error) => error);
 });
@@ -17,7 +17,7 @@ export const patchUpdateThunk = createAsyncThunk(
   "users/patchUpdateThunk",
   async (payload, thunkAPI) => {
     const resdata = await axios
-      .patch( URL + `books/${payload.id}`, {
+      .patch( `${URL}books/${payload.id}`, {
         content: payload.updated.updateComment,
       })
       .then((res) => res.data )
